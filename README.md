@@ -39,19 +39,13 @@ pytest -q
 
 - `requirements.txt` - Python dependencies
 - `conftest.py` - pytest fixtures
-- `tests/` - example test scripts
+- `tests/` - test scripts
 
 ## Notes
 
 - Uses `webdriver-manager` to automatically download drivers.
-- Example scripts use Chrome and will open browser windows. Ensure Chrome is installed.
+- Scripts use Chrome and will open browser windows. Ensure Chrome is installed.
 
-## Portfolio Improvement Applied
-
-- Added a simple Page Object: `HomePage` in `pages/home_page.py`.
-- Converted one test to use it: `tests/test_python_org.py::test_docs_link`.
-- Kept the rest of the suite intentionally direct (no full POM refactor), so the repo still highlights Selenium fundamentals while showing awareness of scalable design patterns.
-# Selenium
 
 
 ## Purpose of This Repository
