@@ -1,0 +1,44 @@
+name: Selenium CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "tests/**"
+      - "pages/**"
+      - "conftest.py"
+      - "requirements.txt"
+      - ".github/workflows/selenium-ci.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "tests/**"
+      - "pages/**"
+      - "conftest.py"
+      - "requirements.txt"
+      - ".github/workflows/selenium-ci.yml"
+
+jobs:
+  selenium-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up Chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run smoke tests
+        env:
+          CI: "true"
+        run: pytest -q tests/test_python_org.py

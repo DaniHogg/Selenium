@@ -45,6 +45,12 @@ pytest -q
 
 - Uses `webdriver-manager` to automatically download drivers.
 - Example scripts use Chrome and will open browser windows. Ensure Chrome is installed.
+
+## Portfolio Improvement Applied
+
+- Added a simple Page Object: `HomePage` in `pages/home_page.py`.
+- Converted one test to use it: `tests/test_python_org.py::test_docs_link`.
+- Kept the rest of the suite intentionally direct (no full POM refactor), so the repo still highlights Selenium fundamentals while showing awareness of scalable design patterns.
 # Selenium
 
 
