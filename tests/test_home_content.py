@@ -9,7 +9,8 @@ def test_hero_kicker_visible(browser):
     page = HomePage(browser)
     page.open(site_url())
     kicker = page.wait_for_element(page.HERO_KICKER)
-    assert "QA Automation Engineer" in kicker.text
+    # CSS text-transform may render as uppercase; compare case-insensitively.
+    assert "qa automation engineer" in kicker.text.lower()
 
 
 def test_cta_buttons_present(browser):
