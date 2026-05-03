@@ -17,6 +17,9 @@ on:
       - "conftest.py"
       - "requirements.txt"
       - ".github/workflows/selenium-ci.yml"
+  schedule:
+    - cron: "0 5 * * *"
+  workflow_dispatch:
 
 jobs:
   selenium-tests:
@@ -38,7 +41,42 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run smoke tests
+      - name: Run Selenium tests
         env:
           CI: "true"
-        run: pytest -q tests/test_python_org.py
+          BASE_URL: "https://danihogg.github.io"
+          SITE_BASE_PATH: "/qa-portfolio-livesite"
+        run: |
+          pytest tests/ -v \
+            --json-report \
+            --json-report-file=selenium-report/report.json
+
+      - name: Upload Selenium JSON report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: selenium-json
+          path: selenium-report/report.json
+          retention-days: 14
+
+  notify-portfolio:
+    needs: selenium-tests
+    if: always() && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch portfolio update
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.PORTFOLIO_SITE_TOKEN }}
+          repository: ${{ vars.PORTFOLIO_SITE_REPO }}
+          event-type: portfolio-results-ready
+          client-payload: |
+            {
+              "source_repo": "${{ github.repository }}",
+              "source_workflow": "${{ github.workflow }}",
+              "source_run_id": "${{ github.run_id }}",
+              "source_run_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+              "source_artifact": "selenium-json",
+              "source_branch": "${{ github.ref_name }}",
+              "source_commit_sha": "${{ github.sha }}"
+            }
