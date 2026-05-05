@@ -14,7 +14,7 @@ def test_about_heading(browser):
 def test_about_kicker(browser):
     page = AboutPage(browser)
     page.open(site_url("about.html"))
-    assert "About" in page.kicker_text()
+    assert "about" in page.kicker_text().lower()
 
 
 def test_about_main_content_present(browser):

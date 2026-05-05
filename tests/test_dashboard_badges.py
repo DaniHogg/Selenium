@@ -14,8 +14,8 @@ def test_dashboard_cards_have_status_badge(browser):
     cards = page.project_cards()
     assert cards, "No project cards found — JS render may have failed"
     for card in cards:
-        badges = card.find_elements(By.CSS_SELECTOR, ".badge")
-        assert badges, f"Card '{card.get_attribute('data-project-id')}' has no status badge"
+        badges = card.find_elements(By.CSS_SELECTOR, ".status")
+        assert badges, f"Card '{card.get_attribute('data-id')}' has no status badge"
         badge_text = " ".join(b.text for b in badges).strip()
         assert badge_text, "Badge element found but has no visible text"
 
