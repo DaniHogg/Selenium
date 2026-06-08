@@ -2,14 +2,13 @@
 
 This repository contains **focused Selenium automation examples using Python and pytest**.
 
-It is intentionally lightweight and exists to demonstrate:
+It is intentionally compact and exists to demonstrate:
 - Core Selenium concepts
 - Pytest fixture usage
 - Basic project structure for browser automation
 
 > For a production-ready, CI-enabled automation framework, see:
 > **qa-automation-template**
-``
 
 ## Setup
 
@@ -55,4 +54,4 @@ This repo intentionally focuses on **Selenium fundamentals** without the additio
 It is designed to:
 - Show clear, readable Selenium tests
 - Demonstrate pytest fixtures via `conftest.py`
-- Serve as a reference implementation for small-scale UI automation
+- Serve as a reference implementation for small-scale UI automation that can be adapted into larger team frameworks
