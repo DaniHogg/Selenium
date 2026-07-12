@@ -3,8 +3,8 @@ from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 
 
-class AboutPage(BasePage):
-    """Page object for the About Me page (about.html)."""
+class AgenticQaToolPage(BasePage):
+    """Page object for the Agentic QA Tool project page (agentic-qa-tool.html)."""
 
     HEADING = (By.CSS_SELECTOR, "header h1")
     KICKER = (By.CSS_SELECTOR, "header .kicker")

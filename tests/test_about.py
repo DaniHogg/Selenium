@@ -1,22 +1,27 @@
 """About page content tests — verify that the About Me page renders its
 heading and main content sections correctly."""
 
+import pytest
+
 from pages.about_page import AboutPage
 from conftest import site_url
 
 
+@pytest.mark.regression
 def test_about_heading(browser):
     page = AboutPage(browser)
     page.open(site_url("about.html"))
     assert "QA Automation" in page.heading_text()
 
 
+@pytest.mark.regression
 def test_about_kicker(browser):
     page = AboutPage(browser)
     page.open(site_url("about.html"))
     assert "about" in page.kicker_text().lower()
 
 
+@pytest.mark.regression
 def test_about_main_content_present(browser):
     page = AboutPage(browser)
     page.open(site_url("about.html"))

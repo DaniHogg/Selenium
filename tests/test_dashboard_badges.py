@@ -1,12 +1,14 @@
 """Dashboard badge tests — verify that CI status cards carry a visible
 freshness badge so reviewers can see whether results are current."""
 
+import pytest
 from selenium.webdriver.common.by import By
 
 from pages.dashboard_page import DashboardPage
 from conftest import site_url
 
 
+@pytest.mark.regression
 def test_dashboard_cards_have_status_badge(browser):
     """Each rendered CI card should include a freshness badge (Fresh or Stale)."""
     page = DashboardPage(browser)
@@ -20,6 +22,7 @@ def test_dashboard_cards_have_status_badge(browser):
         assert badge_text, "Badge element found but has no visible text"
 
 
+@pytest.mark.regression
 def test_dashboard_brand_link_returns_home(browser):
     """Clicking the brand link from the dashboard should return to the home page."""
     page = DashboardPage(browser)

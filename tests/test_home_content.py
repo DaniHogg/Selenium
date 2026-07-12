@@ -1,10 +1,13 @@
 """Home page content tests — verify that the hero section, CTA buttons, and
 highlight cards are rendered correctly after page load."""
 
+import pytest
+
 from pages.home_page import HomePage
 from conftest import site_url
 
 
+@pytest.mark.regression
 def test_hero_kicker_visible(browser):
     page = HomePage(browser)
     page.open(site_url())
@@ -13,6 +16,7 @@ def test_hero_kicker_visible(browser):
     assert "qa automation engineer" in kicker.text.lower()
 
 
+@pytest.mark.regression
 def test_cta_buttons_present(browser):
     page = HomePage(browser)
     page.open(site_url())
@@ -22,6 +26,7 @@ def test_cta_buttons_present(browser):
         assert btn.is_displayed()
 
 
+@pytest.mark.regression
 def test_highlight_cards_present(browser):
     page = HomePage(browser)
     page.open(site_url())
@@ -29,6 +34,7 @@ def test_highlight_cards_present(browser):
     assert len(cards) >= 2, "Expected highlight cards section with at least two entries"
 
 
+@pytest.mark.regression
 def test_feature_cards_contain_links(browser):
     from selenium.webdriver.common.by import By
     page = HomePage(browser)

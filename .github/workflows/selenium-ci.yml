@@ -41,13 +41,21 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run Selenium tests
+      - name: Run smoke tests (fast baseline)
         env:
           CI: "true"
           BASE_URL: "https://danihogg.github.io"
           SITE_BASE_PATH: "/qa-portfolio-livesite"
         run: |
-          pytest tests/ -v \
+          pytest tests/ -v -m smoke -n auto --reruns 1 --reruns-delay 2
+
+      - name: Run full Selenium test suite
+        env:
+          CI: "true"
+          BASE_URL: "https://danihogg.github.io"
+          SITE_BASE_PATH: "/qa-portfolio-livesite"
+        run: |
+          pytest tests/ -v -n auto --reruns 1 --reruns-delay 2 \
             --json-report \
             --json-report-file=selenium-report/report.json
 
@@ -58,6 +66,15 @@ jobs:
           name: selenium-json
           path: selenium-report/report.json
           retention-days: 14
+
+      - name: Upload failure screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: selenium-failure-screenshots
+          path: screenshots/
+          retention-days: 14
+          if-no-files-found: ignore
 
   notify-portfolio:
     needs: selenium-tests

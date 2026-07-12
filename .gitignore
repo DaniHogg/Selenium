@@ -89,3 +89,6 @@ selenium.log
 *.tmp
 *.out
 *.report
+
+# Failure screenshots captured by conftest.py's pytest_runtest_makereport hook
+screenshots/

@@ -13,8 +13,8 @@ class HomePage(BasePage):
     HIGHLIGHT_CARDS = (By.CSS_SELECTOR, ".highlights .highlight-card")
     FEATURE_CARDS = (By.CSS_SELECTOR, ".cards .card")
 
-    def open(self, base_url: str):
-        self.navigate(base_url)
+    def open(self, url: str):
+        self.navigate(url)
 
     def nav_links(self):
         return self.wait_for_elements(self.NAV_LINKS)

@@ -1,7 +1,11 @@
+import os
+
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-DEFAULT_TIMEOUT = 10
+# Explicit-wait timeout (seconds) used by all page objects. Configurable via
+# env var, consistent with the BASE_URL/SITE_BASE_PATH pattern in conftest.py.
+DEFAULT_TIMEOUT = int(os.environ.get("SELENIUM_TIMEOUT", "10"))
 
 
 class BasePage:
