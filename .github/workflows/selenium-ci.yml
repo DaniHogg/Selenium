@@ -17,8 +17,6 @@ on:
       - "conftest.py"
       - "requirements.txt"
       - ".github/workflows/selenium-ci.yml"
-  schedule:
-    - cron: "0 5 * * *"
   workflow_dispatch:
 
 jobs:
